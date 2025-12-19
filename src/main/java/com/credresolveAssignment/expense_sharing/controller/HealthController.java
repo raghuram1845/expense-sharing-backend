@@ -8,6 +8,6 @@ public class HealthController {
 
     @GetMapping
     public String health(){
-        return "Expense sharing backend is running";
+        return "Live Deployed Backend on Render with PostgreSQL :Expense sharing backend is running";
     }
 }
