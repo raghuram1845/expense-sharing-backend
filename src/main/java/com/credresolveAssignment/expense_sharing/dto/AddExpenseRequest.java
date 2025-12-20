@@ -1,6 +1,5 @@
 package com.credresolveAssignment.expense_sharing.dto;
 
-import com.credresolveAssignment.expense_sharing.split.SplitType;
 import java.util.List;
 import java.util.Map;
 
@@ -11,81 +10,46 @@ public class AddExpenseRequest {
     private Long paidByUserId;
     private Long groupId;
 
-    // used for EQUAL split
+    // NEW
+    private String splitType; // EQUAL, EXACT, PERCENTAGE
+
+    // For EQUAL
     private List<Long> participantUserIds;
 
-    // used for EXACT split (userId -> amount)
+    // For EXACT
     private Map<Long, Double> exactAmounts;
 
-    // used for PERCENTAGE split (userId -> percentage)
-    private Map<Long, Double> percentageSplits;
+    // For PERCENTAGE
+    private Map<Long, Double> percentages;
 
-    // tells backend which logic to apply
-    private SplitType splitType;
+    // getters & setters
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 
-    // ===== getters & setters =====
+    public double getAmount() { return amount; }
+    public void setAmount(double amount) { this.amount = amount; }
 
-    public String getDescription() {
-        return description;
-    }
+    public Long getPaidByUserId() { return paidByUserId; }
+    public void setPaidByUserId(Long paidByUserId) { this.paidByUserId = paidByUserId; }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    public Long getGroupId() { return groupId; }
+    public void setGroupId(Long groupId) { this.groupId = groupId; }
 
-    public double getAmount() {
-        return amount;
-    }
+    public String getSplitType() { return splitType; }
+    public void setSplitType(String splitType) { this.splitType = splitType; }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
-    public Long getPaidByUserId() {
-        return paidByUserId;
-    }
-
-    public void setPaidByUserId(Long paidByUserId) {
-        this.paidByUserId = paidByUserId;
-    }
-
-    public Long getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(Long groupId) {
-        this.groupId = groupId;
-    }
-
-    public List<Long> getParticipantUserIds() {
-        return participantUserIds;
-    }
-
+    public List<Long> getParticipantUserIds() { return participantUserIds; }
     public void setParticipantUserIds(List<Long> participantUserIds) {
         this.participantUserIds = participantUserIds;
     }
 
-    public Map<Long, Double> getExactAmounts() {
-        return exactAmounts;
-    }
-
+    public Map<Long, Double> getExactAmounts() { return exactAmounts; }
     public void setExactAmounts(Map<Long, Double> exactAmounts) {
         this.exactAmounts = exactAmounts;
     }
 
-    public Map<Long, Double> getPercentageSplits() {
-        return percentageSplits;
-    }
-
-    public void setPercentageSplits(Map<Long, Double> percentageSplits) {
-        this.percentageSplits = percentageSplits;
-    }
-
-    public SplitType getSplitType() {
-        return splitType;
-    }
-
-    public void setSplitType(SplitType splitType) {
-        this.splitType = splitType;
+    public Map<Long, Double> getPercentages() { return percentages; }
+    public void setPercentages(Map<Long, Double> percentages) {
+        this.percentages = percentages;
     }
 }
