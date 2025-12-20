@@ -1,0 +1,57 @@
+Expense Sharing Backend:
+
+-> About the Project
+    This project is a backend system for an expense sharing application (similar to Splitwise).
+    It allows users to create groups, add shared expenses, and see who owes money and who should receive money.
+
+    The main goal of this assignment was to focus on backend design, API structure, and business logic, so no frontend is implemented.
+
+-> Tech Stack Used
+   Java
+   Spring Boot
+   Spring Data JPA
+   PostgreSQL (for persistent storage)
+   Docker
+   Deployed on Render
+
+-> What This Backend Can Do
+   Create users
+   Create groups and add users to groups
+   Add shared expenses within a group
+   Support different expense split types
+   Equal split
+   Exact amount split
+   Percentage split
+   Calculate balances for each user in a group
+
+-> How the System Works (High Level)
+   Each expense belongs to a group
+   One user pays the expense
+   The expense is split among group members based on the chosen split type
+   Balances are calculated by:
+   Adding the full amount to the payer
+   Subtracting the owed amount from each participant
+   A positive balance means the user should receive money.
+   A negative balance means the user owes money.
+
+-> API Overview
+   1)Users
+    POST /users – create a user
+    GET /users – get all users
+
+   2)Groups
+    POST /groups – create a group
+    POST /groups/{groupId}/addUser/{userId} – add user to group
+    GET /groups/{groupId}/balances – get balances for the group
+
+   3)Expenses
+    POST /expenses/equal
+    POST /expenses/exact
+    POST /expenses/percentage
+
+  Note: All APIs can be tested using Postman or any REST client.
+
+-> Deployment
+   The application is containerized using Docker and deployed on Render.
+   PostgreSQL is used as the database to make sure data is not lost when the application restarts.
+   Database credentials are managed using environment variables.
