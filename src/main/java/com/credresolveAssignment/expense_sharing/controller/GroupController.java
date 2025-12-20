@@ -47,6 +47,10 @@ public class GroupController {
         group.getMembers().add(user);
         return groupRepository.save(group);
     }
+    @GetMapping("/{groupId}")
+    public GroupEntity getGroupById(@PathVariable Long groupId) {
+        return groupRepository.findById(groupId).orElseThrow(() -> new RuntimeException("Group not found"));
+    }
 
     @GetMapping("/{groupId}/balances")
     public Map<String, Double> getGroupBalances(@PathVariable Long groupId) {
