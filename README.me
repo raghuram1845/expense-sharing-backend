@@ -25,25 +25,123 @@ Expense Sharing Backend:
    Calculate balances for each user in a group
 
 -> How the System Works (High Level)
-   Each expense belongs to a group
-   One user pays the expense
-   The expense is split among group members based on the chosen split type
-   Balances are calculated by:
-   Adding the full amount to the payer
-   Subtracting the owed amount from each participant
-   A positive balance means the user should receive money.
-   A negative balance means the user owes money.
+    1.Users are created first.
+    2.A group is created (example: Trip, Roommates, etc.).
+    3.Users are added to a group.
+    4.Expenses are added inside a group.
+    5.Each expense can be split in:
+       - Equal split
+       - Exact amount split
+       - Percentage split
+    6.The system calculates balances per group based on all expenses.
+    Positive balance → user should receive money
+    Negative balance → user owes money
 
--> API Overview
+-> API Overview:
    1)Users
-    POST /users – create a user
-    GET /users – get all users
+    - Create User
+    POST /users  Example: POST → https://expense-sharing-backend-uu00.onrender.com/users
+    Request Body:
+    {
+      "name": "Raghu Ram",
+      "email": "raghuramroyya@gmail.com"
+    }
+--------------------------------------------------
+   - Get All Users
+    GET /users
+    Example: GET → https://expense-sharing-backend-uu00.onrender.com/users
 
    2)Groups
-    POST /groups – create a group Example: POST -> https://expense-sharing-backend-uu00.onrender.com/groups?name=groupName
-    POST /groups/{groupId}/addUser/{userId} – add user to group Example: POST -> https://expense-sharing-backend-uu00.onrender.com/groups/1/addUser/104
-    GET /groups/{groupId} - to check users in the group with ID 
-    GET /groups/{groupId}/balances – get balances for the group Example: GET -> https://expense-sharing-backend-uu00.onrender.com/groups/1/balances
+    - Create Group
+    POST /groups
+    Example: POST → https://expense-sharing-backend-uu00.onrender.com/groups?name=Trip
+--------------------------------------------------
+    - Add User to Group
+    POST /groups/{groupId}/addUser/{userId}
+    Example: POST → https://expense-sharing-backend-uu00.onrender.com/groups/1/addUser/104
+---------------------------------------------------
+    - Get Group Balances
+    GET /groups/{groupId}/balances
+    Example: GET → https://expense-sharing-backend-uu00.onrender.com/groups/1/balances
+
+    Response Example:
+
+    {
+      "Raghu Ram": 450.0,
+      "Nithin": -450.0,
+      "Angadi Kanishka": 0.0
+    }
+
+    Positive value → user should receive money
+    Negative value → user owes money
+------------------------------------------------
+    - Get Group Settlements
+    GET /groups/{groupId}/settlements
+    Example: GET → https://expense-sharing-backend-uu00.onrender.com/groups/1/settlements
+
+    Response Example:
+
+    [
+        {
+            "from": "Angadi Kanishka",
+            "to": "Raghu Ram",
+            "amount": 400.0
+        },
+        {
+            "from": "Angadi Kanishka",
+            "to": "Challa Nithin",
+            "amount": 250.0
+        }
+    ]
+
+   3) Expenses
+    - Add Expense (Equal Split)
+    POST /expenses
+    Example: POST → https://expense-sharing-backend-uu00.onrender.com/expenses
+    Request Body:
+
+    {
+      "description": "Hotel",
+      "amount": 900,
+      "paidByUserId": 1,
+      "groupId": 1,
+      "splitType": "EQUAL",
+      "participantUserIds": [1, 2, 3]
+    }
+--------------------------------------------------
+    - Add Expense (Exact Amount Split)
+    POST /expenses
+
+    {
+      "description": "Dinner",
+      "amount": 600,
+      "paidByUserId": 2,
+      "groupId": 1,
+      "splitType": "EXACT",
+      "exactAmounts": {
+        "1": 200,
+        "2": 250,
+        "3": 150
+      }
+    }
+-------------------------------------------------
+
+    - Add Expense (Percentage Split)
+
+    POST /expenses
+
+    {
+      "description": "Cab",
+      "amount": 500,
+      "paidByUserId": 1,
+      "groupId": 1,
+      "splitType": "PERCENTAGE",
+      "percentages": {
+        "1": 50,
+        "2": 30,
+        "3": 20
+      }
+    }
 
   Note: All APIs can be tested using Postman or any REST client.
 
