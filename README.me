@@ -40,9 +40,9 @@ Expense Sharing Backend:
     GET /users – get all users
 
    2)Groups
-    POST /groups – create a group
-    POST /groups/{groupId}/addUser/{userId} – add user to group
-    GET /groups/{groupId}/balances – get balances for the group
+    POST /groups – create a group Example: POST -> https://expense-sharing-backend-uu00.onrender.com/groups?name=groupName
+    POST /groups/{groupId}/addUser/{userId} – add user to group Example: POST -> https://expense-sharing-backend-uu00.onrender.com/groups/1/addUser/104
+    GET /groups/{groupId}/balances – get balances for the group 
 
    3)Expenses
     POST /expenses/equal
