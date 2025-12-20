@@ -15,12 +15,16 @@ public class UserController {
         this.userRepository=userRepository;
     }
     @PostMapping
-    public AppUser createUser(@RequestBody AppUser user){
-        return userRepository.save(user);
+    public AppUser createUser(@RequestBody AppUser User){
+        return userRepository.save(User);
     }
 
     @GetMapping
     public List<AppUser> getAllUsers(){
         return userRepository.findAll();
+    }
+    @DeleteMapping
+    public void deleteAllUsers() {
+        userRepository.deleteAll();
     }
 }
