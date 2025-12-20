@@ -42,12 +42,8 @@ Expense Sharing Backend:
    2)Groups
     POST /groups – create a group Example: POST -> https://expense-sharing-backend-uu00.onrender.com/groups?name=groupName
     POST /groups/{groupId}/addUser/{userId} – add user to group Example: POST -> https://expense-sharing-backend-uu00.onrender.com/groups/1/addUser/104
-    GET /groups/{groupId}/balances – get balances for the group 
-
-   3)Expenses
-    POST /expenses/equal
-    POST /expenses/exact
-    POST /expenses/percentage
+    GET /groups/{groupId} - to check users in the group with ID 
+    GET /groups/{groupId}/balances – get balances for the group Example: GET -> https://expense-sharing-backend-uu00.onrender.com/groups/1/balances
 
   Note: All APIs can be tested using Postman or any REST client.
 
