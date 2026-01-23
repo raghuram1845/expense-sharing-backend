@@ -18,9 +18,6 @@ public class AppUser {
     @GeneratedValue
     private Long id;
     
-    @Column(nullable=false)
     private String name;
-
-    @Column(unique=true , nullable=false)
     private String email;
 }
